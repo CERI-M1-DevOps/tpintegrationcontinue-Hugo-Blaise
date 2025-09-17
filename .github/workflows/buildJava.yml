@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Build, Test and SonarCloud
+    name: Build, Test, Cache and SonarCloud
     runs-on: ubuntu-latest
 
     steps:
@@ -22,6 +22,15 @@ jobs:
           distribution: corretto
           java-version: '21'
 
+      - name: Cache Maven dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
       - name: Debug files
         run: ls -R ${{ github.workspace }}
 
@@ -34,4 +43,3 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         working-directory: ${{ github.workspace }}
-        
