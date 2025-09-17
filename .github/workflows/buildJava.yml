@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}  # IMPORTANT ! Checkout de la branche source de la PR
 
       - name: Set up Java 21 (Corretto)       
         uses: actions/setup-java@v4
