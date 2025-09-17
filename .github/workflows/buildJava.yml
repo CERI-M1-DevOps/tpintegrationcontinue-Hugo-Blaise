@@ -12,8 +12,6 @@ jobs:
     steps:                                     # 3 étapes
       - name: Checkout repository              # 1) Récupérer le code de la PR
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # nécessaire pour Maven et Sonar éventuellement
 
       - name: Set up Java 21 (Corretto)        # 2) Installer Java 21 (Corretto)
         uses: actions/setup-java@v4
