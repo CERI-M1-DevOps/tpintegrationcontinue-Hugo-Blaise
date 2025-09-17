@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 name: Java CI with Maven - Test and package   # Nom affiché dans l’onglet Actions
 
 on:
@@ -15,32 +14,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Java 21 (Corretto)        # 2) Installer Java 21 (Corretto)
-=======
-name: Java CI with Maven - Test and package   
-
-on:
-  pull_request:                                
-    branches: [ "main" ]                       
-
-jobs:
-  build:                                       
-    name: Build and Test
-    runs-on: ubuntu-latest                     
-
-    steps:                                     
-      - name: Checkout repository              
-        uses: actions/checkout@v4
-
-      - name: Set up Java 21 (Corretto)        
->>>>>>> d7103d29619d9434c74d78ef986830a2d848dbb2
         uses: actions/setup-java@v4
         with:
           distribution: corretto
           java-version: '21'
 
-<<<<<<< HEAD
       - name: Build with Maven (tests included) # 3) Construire + lancer les tests
-=======
-      - name: Build with Maven (tests included) 
->>>>>>> d7103d29619d9434c74d78ef986830a2d848dbb2
         run: mvn -B package
