@@ -12,12 +12,18 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          path: .
 
       - name: Set up Java 21 (Corretto)
         uses: actions/setup-java@v4
         with:
           distribution: corretto
           java-version: '21'
+
+      - name: Debug list files
+        run: ls -R
+        working-directory: ${{ github.workspace }}
 
       - name: Build with Maven (tests included)
         run: mvn -B package
