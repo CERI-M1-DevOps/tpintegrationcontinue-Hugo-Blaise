@@ -1,4 +1,4 @@
-name: Java CI with Maven - Test and package
+name: Java CI with Maven - Test and SonarCloud
 
 on:
   pull_request:                               
@@ -13,7 +13,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.head_ref }}  # IMPORTANT ! Checkout de la branche source de la PR
+          ref: ${{ github.head_ref }}
 
       - name: Set up Java 21 (Corretto)       
         uses: actions/setup-java@v4
