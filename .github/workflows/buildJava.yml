@@ -1,4 +1,4 @@
-name: Java CI with Maven - Test and package   
+name: Java CI with Maven - Test and package
 
 on:
   pull_request:                               
@@ -9,8 +9,8 @@ jobs:
     name: Build and Test
     runs-on: ubuntu-latest                    
 
-    steps:                                    
-      - name: Checkout repository          
+    steps:
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up Java 21 (Corretto)       
