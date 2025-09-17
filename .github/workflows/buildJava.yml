@@ -6,16 +6,19 @@ on:
 
 jobs:
   build:
+    name: Build and Test
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Java
+      - name: Set up Java 21 (Corretto)
         uses: actions/setup-java@v4
         with:
+          distribution: corretto
           java-version: '21'
-          distribution: 'corretto'
 
-      - name: Build with Maven
+      - name: Build with Maven (tests included)
         run: mvn -B package
+        working-directory: ${{ github.workspace }}
