@@ -2,7 +2,9 @@ name: Java CI with Maven - Test and package
 
 on:
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main" ]   # PR vers main
+    # On ajoute ce bloc pour s'assurer que le workflow se lance avec le code de la branche source
+    types: [opened, synchronize, reopened]
 
 jobs:
   build:
@@ -12,6 +14,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}  # IMPORTANT ! Checkout de la branche source de la PR
 
       - name: Set up Java 21 (Corretto)
         uses: actions/setup-java@v4
@@ -19,9 +23,9 @@ jobs:
           distribution: corretto
           java-version: '21'
 
-      - name: Debug list files
-        run: ls -R ${{ github.workspace }}/..
+      - name: Debug files
+        run: ls -R ${{ github.workspace }}   # pour vérifier que pom.xml est présent
 
       - name: Build with Maven (tests included)
         run: mvn -B package
-        working-directory: ${{ github.workspace }}/..
+        working-directory: ${{ github.workspace }}
