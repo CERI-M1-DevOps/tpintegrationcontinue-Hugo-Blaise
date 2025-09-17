@@ -21,4 +21,4 @@ jobs:
 
       - name: Build with Maven (tests included) 
         run: mvn -B package
-        working-directory: ../../
+        working-directory: ../../  #test
