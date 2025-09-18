@@ -1,0 +1,31 @@
+name: Documentation Deployment
+
+on:
+  push:
+    branches: [ dev ]  # Se déclenche à chaque push sur dev
+
+permissions:
+  contents: write  # Pour que GitHub Actions puisse pousser sur gh-pages
+
+jobs:
+  deploy-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: corretto
+          java-version: '21'
+          cache: maven
+
+      - name: Build Javadoc
+        run: mvn -B -DskipTests javadoc:javadoc
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./target/site/apidocs
