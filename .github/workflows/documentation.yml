@@ -1,14 +1,15 @@
 name: Documentation Deployment
 
 on:
-  push:
-    branches: [ dev ]  # Se déclenche à chaque push sur dev
+  pull_request:
+    types: [closed]
 
 permissions:
-  contents: write  # Pour que GitHub Actions puisse pousser sur gh-pages
+  contents: write
 
 jobs:
   deploy-docs:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
